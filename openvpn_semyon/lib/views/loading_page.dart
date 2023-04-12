@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:openvpn_semyon/views/auth/login_main_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 
@@ -12,6 +13,8 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
+  double _percent = 1.0;
+
   @override
   void dispose() {
     super.dispose();
@@ -20,12 +23,15 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
     super.initState();
+
     initialization();
   }
 
   void initialization() async {
-    await Future.delayed(const Duration(seconds: 1));
-    FlutterNativeSplash.remove();
+    await Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (_) => LoginMainPage()));
+    });
   }
 
   @override
@@ -34,7 +40,6 @@ class _LoadingPageState extends State<LoadingPage> {
       body: SafeArea(
         child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              // constraints variable has the size info
               return Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -66,7 +71,7 @@ class _LoadingPageState extends State<LoadingPage> {
                             animation: true,
                             lineHeight: 15.0,
                             animationDuration: 2000,
-                            percent: 1,
+                            percent: _percent,
                             barRadius: Radius.circular(10),
                             progressColor: const Color(0xff2BBEF4),
                           ),

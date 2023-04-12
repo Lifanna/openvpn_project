@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:openvpn_semyon/views/drawers/nav_drawer.dart';
 import 'package:openvpn_semyon/views/init/power_on_page.dart';
+import 'package:openvpn_semyon/views/loading_page.dart';
 
 
-class LoginPage extends StatefulWidget {
-  LoginPage();
+class SignUpPage extends StatefulWidget {
+  SignUpPage();
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   bool checkedValue = false;
-
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void dispose() {
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
+
+  void initialization() async {
+    await Future.delayed(const Duration(seconds: 1));
+    FlutterNativeSplash.remove();
   }
 
   @override
@@ -35,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0,0,10,20),
+                  padding: EdgeInsets.fromLTRB(10,0,10,20),
                   child: Padding(
                     padding: EdgeInsets.all(20),
                     child: PhysicalModel(
@@ -137,27 +149,16 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextButton(
                         onPressed: () async {
                           Navigator.push(
-                            context, MaterialPageRoute(builder: (_) => PowerOnPage()));
+                            context, MaterialPageRoute(builder: (_) => LoadingPage()));
                         },
                         child: Text(
-                          'Sign in',
+                          'Sign up',
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ),
                     ),
                   ),
-                ]
-              ),
-
-              Container(
-                child: Text(
-                  "Forgot the password?",
-                  style: TextStyle(
-                    color: const Color(0xff2CBBF3),
-                    fontWeight: FontWeight.bold,
-                  )
-                ),
-              ),
+                ]),
 
               Row(
                   children: <Widget>[
@@ -216,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account?", 
+                      'Already have an account?', 
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.grey,
@@ -225,10 +226,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () async {
-                        
+                        Navigator.push(
+                          // context, MaterialPageRoute(builder: (_) => LoadingPage()));
+                          context, MaterialPageRoute(builder: (_) => PowerOnPage()));
                       },
                       child: Text(
-                        ' Sign up',
+                        ' Sign in',
                         style: TextStyle(
                         color: const Color(0xff2BBEF4),
                         fontSize: 16

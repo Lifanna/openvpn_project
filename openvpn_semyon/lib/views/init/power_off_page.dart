@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:openvpn_semyon/views/drawers/nav_drawer.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 
-class PowerPage extends StatefulWidget {
-  PowerPage();
+class PowerOffPage extends StatefulWidget {
+  PowerOffPage();
 
   @override
-  State<PowerPage> createState() => _PowerPageState();
+  State<PowerOffPage> createState() => _PowerOffPageState();
 }
 
-class _PowerPageState extends State<PowerPage> {
+class _PowerOffPageState extends State<PowerOffPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void dispose() {
@@ -33,36 +34,8 @@ class _PowerPageState extends State<PowerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.home,
-              ),
-              title: const Text('Page 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.train,
-              ),
-              title: const Text('Page 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+      drawer: CustomDrawer(
+        key: Key("1"),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -93,7 +66,6 @@ class _PowerPageState extends State<PowerPage> {
                             child: IconButton(
                               icon: Icon(Icons.menu_rounded),
                               onPressed: () {
-                                print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
                                 _scaffoldKey.currentState?.openDrawer();
                               }
                             ),
